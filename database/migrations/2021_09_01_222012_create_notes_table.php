@@ -17,7 +17,7 @@ class CreateNotesTable extends Migration
             $table->id();
             $table->unsignedBigInteger('user_id');
             $table->string('title');
-            $table->string('note');
+            $table->string('note', 1500);
             $table->foreign('user_id')->references('id')->on('users');
             $table->timestamps();
         });
