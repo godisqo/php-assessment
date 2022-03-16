@@ -1,0 +1,43 @@
+version: '3'
+
+services:
+    web:
+        image: php-basic-nginx
+        container_name: nginx
+        build:
+            context: ./Docker/nginx
+        ports:
+            - "8080:80"
+        volumes:
+            - .:/var/www/html/
+        networks:
+            - code-network
+        depends_on:
+            - php
+    php:
+        image: php-basic-php-fpm
+        container_name: php
+        build:
+            context: ./Docker/php-fpm
+        volumes:
+            - .:/var/www/html/
+        networks:
+            - code-network
+        depends_on:
+            - mysql
+    mysql:
+        image: mysql
+        container_name: mysql
+        ports:
+            - "33061:3306"
+            - "3306:3306"
+        volumes:
+            - ./mysql:/var/lib/mysql
+        networks:
+            - code-network
+        environment:
+            MYSQL_ROOT_PASSWORD: password
+
+networks:
+    code-network:
+        driver: bridge
