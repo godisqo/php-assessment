@@ -25,7 +25,7 @@ Open shell for php container
 `$ docker exec -it php /bin/bash`
 
 Run artisan commands  
-`php artisan key:generate && php artisan migrate && php artisan db:seed`
+`php artisan key:generate && php artisan migrate && php artisan db:seed && php artisan storage:link`
 
 #### Confirm below Api endpoints are available:
 
